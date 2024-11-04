@@ -1,6 +1,6 @@
 # raytracer
 
-## To run the code, use cmake
+## to run the code, use cmake
 ### standard way
 cmake -B build
 --> writes build files using the CMakeLists.txt
