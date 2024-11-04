@@ -4,7 +4,7 @@ int main() {
     int width = 256;
     int height = 256;
 
-    std::cout << "Sample Image\n" << width << " " << height << "\n255\n";
+    std::cout << "P3\n" << width << " " << height << "\n255\n";
 
     for (int j = 0; j < height; ++j) {
         for (int i = 0; i < width; ++i) {

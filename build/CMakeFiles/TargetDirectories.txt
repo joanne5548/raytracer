@@ -1,0 +1,3 @@
+C:/Users/joann/git/raytracer/build/CMakeFiles/my_executable.dir
+C:/Users/joann/git/raytracer/build/CMakeFiles/edit_cache.dir
+C:/Users/joann/git/raytracer/build/CMakeFiles/rebuild_cache.dir
