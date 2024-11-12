@@ -6,7 +6,7 @@
 
 using color = vec3;
 
-void white_color(std::ostream& out, const color& pixel_color) {
+void write_color(std::ostream& out, const color& pixel_color) {
     double r = pixel_color.x();
     double g = pixel_color.y();
     double b = pixel_color.z();
