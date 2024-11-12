@@ -49,4 +49,43 @@ inline std::ostream& operator<<(std::ostream& out, const vec3& v) {
     return out << v.e[0] << ' ' << v.e[1] << ' ' << v.e[2];
 }
 
+// use reference to v and u for performance reasons
+inline vec3 operator+(const vec3& v, const vec3& u) {
+    return vec3(v.e[0] + u.e[0], v.e[1] + u.e[1], v.e[2] + u.e[2]);
+}
+
+inline vec3 operator-(const vec3& v, const vec3& u) {
+    return vec3(v.e[0] - u.e[0], v.e[1] - u.e[1], v.e[2] - u.e[2]);
+}
+
+inline vec3 operator*(const vec3& v, const vec3& u) {
+    return vec3(v.e[0] * u.e[0], v.e[1] * u.e[1], v.e[2] * u.e[2]);
+}
+
+inline vec3 operator*(double t, const vec3& v) {
+    return vec3(t * v.e[0], t * v.e[1], t * v.e[2]);
+}
+
+inline vec3 operator*(const vec3& v, double t) {
+    return t * v;
+}
+
+inline vec3 operator/(const vec3& v, double t) {
+    return (1/t) * v;
+}
+
+inline double dot(const vec3& v, const vec3& u) {
+    return v.e[0] * u.e[0] + v.e[1] * u.e[1] + v.e[2] * u.e[2];
+}
+
+inline vec3 cross(const vec3& v, const vec3& u) {
+    return vec3(v.e[1] * u.e[2] - v.e[2] * u.e[1],
+                v.e[2] * u.e[0] - v.e[0] * u.e[2],
+                v.e[0] * u.e[1] - v.e[1] * u.e[0]);
+}
+
+inline vec3 unit_vector(const vec3& v) {
+    return v / v.length();
+}
+
 #endif
