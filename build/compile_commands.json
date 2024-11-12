@@ -1,8 +1,0 @@
-[
-{
-  "directory": "C:/Users/joann/git/raytracer/build",
-  "command": "C:\\Users\\joann\\mingw64\\bin\\g++.exe   -g -std=gnu++14 -o CMakeFiles\\my_executable.dir\\src\\main.cc.obj -c C:\\Users\\joann\\git\\raytracer\\src\\main.cc",
-  "file": "C:/Users/joann/git/raytracer/src/main.cc",
-  "output": "CMakeFiles/my_executable.dir/src/main.cc.obj"
-}
-]
