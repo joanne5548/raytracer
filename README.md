@@ -1,16 +1,12 @@
 # raytracer
 
-## to run the code, use cmake
-### standard way
-```cmake -B build``` <br />
---> writes build files using the CMakeLists.txt <br />
-```cmake --build build``` <br />
---> creates the executable <br />
-<br />
-```build/my_executable.exe > image.ppm``` <br />
---> writes the program output to image.ppm
+## How to run the code
+### I used cmake to compile C++
+At the root directory, simply type `./generate.sh` <br />
+It automatically generates the sample image in PPM format <br />
 
-### optimized way
-```cmake --build build --config release``` <br />
-```build\Release\inOneWeekend.exe > image.ppm``` <br />
-(I haven't tried this yet)
+### How to view PPM image files
+I used the website [PPM Viewer](https://www.cs.rhodes.edu/welshc/COMP141_F16/ppmReader.html) <br />
+
+### Sample Image
+![Vertical gradient, pink to yellow](/sample_images/gradient_pink_to_yellow.ppm)
