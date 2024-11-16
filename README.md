@@ -9,4 +9,4 @@ It automatically generates the sample image in PPM format in `sample_images` dir
 I used the website [PPM Viewer](https://www.cs.rhodes.edu/welshc/COMP141_F16/ppmReader.html) <br />
 
 ### Sample Image
-![Vertical gradient, pink to yellow](/sample_images/gradient_pink_to_yellow.png)
+![Vertical gradient, pink to yellow](/sample_images/sphere_minus.png)
