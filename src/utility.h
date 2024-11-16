@@ -4,14 +4,6 @@
 #include "color.h"
 #include "ray.h"
 
-// class utility{
-//     public:
-//         static color ray_color_vertical_gradient(const ray& r);
-//         static color ray_color_diagonal_gradient(const ray& r, double viewport_ratio);
-//         static color sphere(const point3& center, const ray& r);
-//         static color color_sphere(const point3& center, const ray& r);
-// };
-
 color ray_color_vertical_gradient(const ray& r) {
     // normalize dir vector. The components are now in the range of [-1.0, 1.0]
     const vec3& dir_norm = unit_vector(r.direction());
@@ -46,9 +38,9 @@ color ray_color_diagonal_gradient(const ray& r, double viewport_ratio) {
 
 /**
  * @brief Checks if the ray intersects with the sphere.
- * Uses determinant b^2 - 4ac
+ * Uses discriminant b^2 - 4ac
  */
-bool intersects_sphere(const point3& center, double radius, const ray& r) {
+double intersection_sphere(const point3& center, double radius, const ray& r) {
     point3 origin = r.origin();
     vec3 dir = r.direction();
     vec3 u = center - origin;
@@ -57,14 +49,28 @@ bool intersects_sphere(const point3& center, double radius, const ray& r) {
     double b = -2 * dot(dir, u);
     double c = dot(u, u) - radius * radius;
 
-    return b * b - 4 * a * c >= 0;
-}
-
-color color_sphere(const point3& center, double radius, const ray& r) {
-    if (intersects_sphere(center, radius, r)) {
-        return color(175, 213, 240);
+    double discriminant = b * b - 4.0 * a * c;
+    if (discriminant < 0) {
+        return -1.0; // right now this is fine since we don't care about t < 0 ??
     }
-    return ray_color_vertical_gradient(r);
+
+    // There could be two solutions in the quadratic root formula
+    // +: represents intersection on the front of the sphere
+    // -: represents intersection on the back of the sphere
+    return (-b + sqrt(discriminant)) / (2.0 * a);
+}
+color color_sphere(const point3& center, double radius, const ray& r) {
+    double t_solution = intersection_sphere(center, radius, r);
+
+    if (t_solution == -1) {
+        return ray_color_vertical_gradient(r);
+    }
+
+    vec3 intersection = r.at(t_solution);
+    vec3 outward_normal = unit_vector(intersection - center); // note each component is [-1, 1] - we need [0, 1] for color mapping
+    color rgb_mapping = 0.5 * color(outward_normal.x() + 1, outward_normal.y() + 1, outward_normal.z() + 1);
+
+    return rgb_mapping;
 }
 
 #endif

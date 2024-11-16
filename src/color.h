@@ -6,6 +6,12 @@
 
 using color = vec3;
 
+/**
+ * @brief Parameterized constructor.
+ *
+ * @param out Outstream object
+ * @param pixel_color Color type to be mapped. Both [0, 1] and [0, 255] ranges are supported.
+ */
 void write_color(std::ostream& out, const color& pixel_color) {
     double r = pixel_color.x();
     double g = pixel_color.y();
