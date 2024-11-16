@@ -4,13 +4,15 @@
 #include "color.h"
 #include "ray.h"
 
-class utility{
-    public:
-        static color ray_color_vertical_gradient(const ray& r);
-        static color ray_color_diagonal_gradient(const ray& r, double viewport_ratio);
-};
+// class utility{
+//     public:
+//         static color ray_color_vertical_gradient(const ray& r);
+//         static color ray_color_diagonal_gradient(const ray& r, double viewport_ratio);
+//         static color sphere(const point3& center, const ray& r);
+//         static color color_sphere(const point3& center, const ray& r);
+// };
 
-static color ray_color_vertical_gradient(const ray& r) {
+color ray_color_vertical_gradient(const ray& r) {
     // normalize dir vector. The components are now in the range of [-1.0, 1.0]
     const vec3& dir_norm = unit_vector(r.direction());
 
@@ -25,7 +27,7 @@ static color ray_color_vertical_gradient(const ray& r) {
     return y_pos_norm * start_color + (1 - y_pos_norm) * end_color;
 }
 
-static color ray_color_diagonal_gradient(const ray& r, double viewport_ratio) {
+color ray_color_diagonal_gradient(const ray& r, double viewport_ratio) {
     // [-1.0, 1.0]
     const vec3& dir_norm = unit_vector(r.direction());
 
@@ -40,6 +42,17 @@ static color ray_color_diagonal_gradient(const ray& r, double viewport_ratio) {
         return start_color * (1 - 0.5 * y_pos_norm) + end_color * (0.5 * x_pos_norm);
     }
     return start_color * (0.5 - 0.5 * y_pos_norm) + end_color * (0.5 + 0.5 * x_pos_norm);
+}
+
+bool intersects_sphere(const point3& center, const ray& r) {
+
+}
+
+color color_sphere(const point3& center, const ray& r) {
+    if (intersects_sphere(center, r)) {
+        return color(175, 213, 240);
+    }
+    return ray_color_vertical_gradient(r);
 }
 
 #endif

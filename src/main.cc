@@ -35,6 +35,7 @@ int main() {
     // define first pixel center
     // The first pixel center is half pixel sizes away from each edges
     auto pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_u + pixel_delta_v);
+    point3 sphere_center = point3(0, 0, -1);
 
     // Print out the image
     std::cout << "P3\n" << image_width << " " << image_height << "\n255\n";
@@ -49,7 +50,8 @@ int main() {
 
             ray r = ray(camera_center, ray_direction);
 
-            color pixel_color = ray_color_diagonal_gradient(r, viewport_ratio);
+            // color pixel_color = ray_color_diagonal_gradient(r, viewport_ratio);
+            color pixel_color = color_sphere(sphere_center, r);
             write_color(std::cout, pixel_color);
         }
     }
