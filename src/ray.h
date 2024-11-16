@@ -3,6 +3,16 @@
 
 #include "vec3.h"
 
+/**
+ * @class ray
+ *
+ * This class represents a ray with origin (point3) and direction (vec3):
+ * R(t) = orig + t * dir
+ * It implements a function at(t) to return the point where t = certain value
+ *
+ * @see vec3
+ * @see point3
+ */
 class ray {
     point3 orig;
     vec3 dir;

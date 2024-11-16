@@ -44,12 +44,24 @@ color ray_color_diagonal_gradient(const ray& r, double viewport_ratio) {
     return start_color * (0.5 - 0.5 * y_pos_norm) + end_color * (0.5 + 0.5 * x_pos_norm);
 }
 
-bool intersects_sphere(const point3& center, const ray& r) {
+/**
+ * @brief Checks if the ray intersects with the sphere.
+ * Uses determinant b^2 - 4ac
+ */
+bool intersects_sphere(const point3& center, double radius, const ray& r) {
+    point3 origin = r.origin();
+    vec3 dir = r.direction();
+    vec3 u = center - origin;
 
+    double a = dot(dir, dir);
+    double b = -2 * dot(dir, u);
+    double c = dot(u, u) - radius * radius;
+
+    return b * b - 4 * a * c >= 0;
 }
 
-color color_sphere(const point3& center, const ray& r) {
-    if (intersects_sphere(center, r)) {
+color color_sphere(const point3& center, double radius, const ray& r) {
+    if (intersects_sphere(center, radius, r)) {
         return color(175, 213, 240);
     }
     return ray_color_vertical_gradient(r);
