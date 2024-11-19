@@ -1,6 +1,5 @@
-## Sample Doxygen-style comments in C++
+Sample Doxygen-style comments in C++
 
-```
 /**
  * @class Vector3D
  * @brief A class representing a 3D vector with basic vector operations.
@@ -47,4 +46,3 @@ private:
     /** @brief The z-coordinate of the vector */
     double z_;
 };
-```

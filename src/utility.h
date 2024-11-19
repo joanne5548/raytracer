@@ -37,13 +37,13 @@ color ray_color_diagonal_gradient(const ray& r, double viewport_ratio) {
 }
 
 /**
- * @brief Checks if the ray intersects with the sphere.
+ * @returns t value of ray r where the intersection occurs
  * Uses discriminant b^2 - 4ac
  */
 double intersection_sphere(const point3& center, double radius, const ray& r) {
     point3 origin = r.origin();
     vec3 dir = r.direction();
-    vec3 u = center - origin;
+    vec3 u = center - origin; // The (C - P0) part
 
     double a = dot(dir, dir);
     double b = -2 * dot(dir, u);

@@ -7,7 +7,7 @@ It automatically generates the sample image in PPM format in `sample_images` dir
 
 ### How to view PPM image files
 I use the website [PPM Viewer](https://www.cs.rhodes.edu/welshc/COMP141_F16/ppmReader.html) <br />
-The VSCode extension [PBM/PPM/PGM Viewer for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ngtystr.ppm-pgm-viewer-for-vscode) is useful too <br />
+The VSCode extension [PBM/PPM/PGM Viewer for Visual Studio Code](https://marketplace.visualstudio.com/items?itemName=ngtystr.ppm-pgm-viewer-for-vscode) is also useful <br />
 
 ### Sample Image (work in progress)
 ![Vertical gradient, pink to yellow](/sample_images/sphere_minus.png)
