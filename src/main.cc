@@ -1,8 +1,8 @@
 #include <iostream>
-#include "vec3.h"
-#include "color.h"
-#include "ray.h"
-#include "utility.h"
+#include "basic/vec3.h"
+#include "basic/color.h"
+#include "basic/ray.h"
+#include "basic/utility.h"
 
 int main() {
     // Image
