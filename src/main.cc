@@ -1,8 +1,9 @@
 #include <iostream>
-#include "basic/vec3.h"
-#include "basic/color.h"
-#include "basic/ray.h"
-#include "basic/utility.h"
+#include "vec3.h"
+#include "color.h"
+#include "ray.h"
+#include "utility.h"
+#include "sphere.h"
 
 int main() {
     // Image
@@ -39,6 +40,7 @@ int main() {
     vec3 pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_w + pixel_delta_h);
     point3 sphere_center = point3(0, 0, -1);
     double radius = .5;
+    // sphere s1 = sphere(center, radius);
 
     // Print out the image
     std::cout << "P3\n" << image_width << " " << image_height << "\n255\n";
