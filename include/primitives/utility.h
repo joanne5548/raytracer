@@ -1,8 +1,10 @@
 #ifndef UTILITY_H
 #define UTILITY_H
 
+#include <float.h>
 #include "color.h"
 #include "ray.h"
+#include "hittable_list.h"
 
 color ray_color_vertical_gradient(const ray& r) {
     // normalize dir vector. The components are now in the range of [-1.0, 1.0]
@@ -71,6 +73,16 @@ color color_sphere(const point3& center, double radius, const ray& r) {
     color rgb_mapping = 0.5 * color(outward_normal.x() + 1, outward_normal.y() + 1, outward_normal.z() + 1);
 
     return rgb_mapping;
+}
+
+color color_hittable_list(const hittable_list& list, const ray& r, hit_record& rec) {
+    if (list.hit(r, DBL_MIN, DBL_MAX, rec)) {
+        vec3 normal = rec.normal;
+        return 0.5 * color(normal.x() + 1, normal.y() + 1, normal.z() + 1);
+    }
+    else {
+        return ray_color_vertical_gradient(r);
+    }
 }
 
 #endif
