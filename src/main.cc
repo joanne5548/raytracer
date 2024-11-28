@@ -1,10 +1,10 @@
 #include <iostream>
-#include "vec3.h"
 #include "color.h"
 #include "ray.h"
-#include "utility.h"
+#include "sandbox.h"
 #include "sphere.h"
 #include "hittable_list.h"
+#include "constants.h"
 
 using std::make_shared;
 using std::shared_ptr;
