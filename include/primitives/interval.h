@@ -1,3 +1,4 @@
+#pragma once
 #ifndef INTERVAL_H
 #define INTERVAL_H
 
@@ -24,10 +25,10 @@ class interval {
             return x > min && x < max;
         }
 
-        static const interval empty, universe;
+        //static const interval empty, universe;
 };
 
-const interval interval::empty = interval(infinity, -infinity);
-const interval interval::universe = interval(-infinity, infinity);
+// const interval interval::empty = interval(infinity, -infinity);
+// const interval interval::universe = interval(-infinity, infinity);
 
 #endif

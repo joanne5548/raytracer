@@ -1,3 +1,4 @@
+#pragma once
 #ifndef UTILITY_H
 #define UTILITY_H
 
@@ -5,20 +6,17 @@
 #include "color.h"
 #include "ray.h"
 #include "hittable_list.h"
-#include "constants.h"
 
 color ray_color_vertical_gradient(const ray& r) {
     // normalize dir vector. The components are now in the range of [-1.0, 1.0]
     const vec3& dir_norm = unit_vector(r.direction());
 
     // Scale y in range from [-1.0, 1.0] to [0.0, 1.0]
-    // double x_pos_norm = 0.5 * (dir_norm.x() + 1.0);
     double y_pos_norm = 0.5 * (dir_norm.y() + 1.0);
-    // std::cout << y_pos_norm << std::endl;
 
     // start from blue, end as pink - top to bottom
-    color start_color = color(122, 215, 240); // blue
-    color end_color = color(248, 200, 220); // pink
+    color start_color = color(209, 243, 255);
+    color end_color = color(248, 200, 220);
     return y_pos_norm * start_color + (1 - y_pos_norm) * end_color;
 }
 
@@ -72,7 +70,6 @@ color color_sphere(const point3& center, double radius, const ray& r) {
 
     vec3 intersection = r.at(t_solution);
     vec3 outward_normal = unit_vector(intersection - center); // note each component is [-1, 1] - we need [0, 1] for color mapping
-    // color rgb_mapping = 0.5 * color(outward_normal.x() + 1, outward_normal.y() + 1, outward_normal.z() + 1);
 
     return rgb_mapping(outward_normal);
 }

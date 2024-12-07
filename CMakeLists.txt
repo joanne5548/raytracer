@@ -6,11 +6,14 @@ set(CMAKE_CXX_STANDARD 14)            # Enable c++14 standard
 # set(SOURCE_FILES main.cc)
 
 # Add executable target with source files listed in SOURCE_FILES variable
-add_executable(raytracer ./src/main.cc)
+add_executable(raytracer
+    ./src/main.cpp
+    ./include/camera.cpp)
 
 # Include target directories to allow include paths without direct paths
 target_include_directories(raytracer
     PRIVATE
+        ${CMAKE_SOURCE_DIR}/include
         ${CMAKE_SOURCE_DIR}/include/primitives
         ${CMAKE_SOURCE_DIR}/include/hittable
 )
