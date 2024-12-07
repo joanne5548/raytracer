@@ -1,10 +1,10 @@
 #include <iostream>
 #include "color.h"
 #include "ray.h"
-#include "sandbox.h"
+#include "utility.h"
 #include "sphere.h"
 #include "hittable_list.h"
-#include "constants.h"
+#include "interval.h"
 
 using std::make_shared;
 using std::shared_ptr;
@@ -42,20 +42,12 @@ int main() {
     // define first pixel center
     // The first pixel center is half pixel sizes away from each edges
     vec3 pixel00_loc = viewport_upper_left + 0.5 * (pixel_delta_w + pixel_delta_h);
-    
-    point3 sphere_center_1 = point3(0, 0, -5);
-    double radius_1 = .5;
-    shared_ptr<sphere> s1 = make_shared<sphere>(sphere(sphere_center_1, radius_1));
 
-    point3 sphere_center_2 = point3(-0.25, -0.5, -4);
-    double radius_2 = .25;
-    shared_ptr<sphere> s2 = make_shared<sphere>(sphere(sphere_center_2, radius_2));
+    hittable_list happyAndPeacefulWorld = hittable_list();
+    happyAndPeacefulWorld.add(make_shared<sphere>(sphere(point3(0, 0, -5), 0.5)));
+    happyAndPeacefulWorld.add(make_shared<sphere>(sphere(point3(-0.25, -0.5, -4), 0.25)));
+    happyAndPeacefulWorld.add(make_shared<sphere>(sphere(point3(0, -100.5, -5), 100)));
 
-    hittable_list object_list = hittable_list();
-    object_list.add(s1);
-    object_list.add(s2);
-
-    hit_record rec;
     // Print out the image
     std::cout << "P3\n" << image_width << " " << image_height << "\n255\n";
 
@@ -69,9 +61,8 @@ int main() {
 
             ray r = ray(camera_center, ray_direction);
 
-
             // color pixel_color = ray_color_diagonal_gradient(r, viewport_ratio);
-            color pixel_color = color_hittable_list(object_list, r, rec);
+            color pixel_color = color_hittable_list(happyAndPeacefulWorld, r);
 
             write_color(std::cout, pixel_color);
         }

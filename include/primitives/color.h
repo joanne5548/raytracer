@@ -6,6 +6,10 @@
 
 using color = vec3;
 
+color rgb_mapping(const point3& point) {
+    return 0.5 * color(point + point3(1, 1, 1));
+}
+
 /**
  * @brief Parameterized constructor.
  *
