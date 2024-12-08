@@ -66,14 +66,13 @@ void camera::render(const hittable_list& world, color (*background_color)(const 
     std::clog  << "\rDone.                 \n";
 }
 
-// I'm a little concerned multiplying pixel_delta.x or y - it assumes other fields are 0!
 point3 camera::choose_pixel(point3 target) {
-    double x_rand = random_number_generator(-0.5, 0.5) * pixel_delta_w.x();
-    double y_rand = random_number_generator(-0.5, 0.5) * pixel_delta_h.y();
-    return target + point3(x_rand, y_rand, 0);
+    double x_rand = random_number_generator(-0.5, 0.5);
+    double y_rand = random_number_generator(-0.5, 0.5);
+    return target + x_rand * pixel_delta_w + y_rand * pixel_delta_h;
 }
 
-void camera::render_uniform_sampling(const hittable_list& world, color (*background_color)(const ray&)) {
+void camera::render_uniform_sampling(const hittable_list& world, color (*background_color)(const ray&), int sample_size) {
     std::cout << "P3\n" << image_width << " " << image_height << "\n255\n";
 
     for (int j = 0; j < image_height; ++j) {
@@ -82,15 +81,15 @@ void camera::render_uniform_sampling(const hittable_list& world, color (*backgro
             vec3 pixel_center = pixel00_loc + i * pixel_delta_w + j * pixel_delta_h;
             
             color pixel_color(0, 0, 0);
-            for (int j = 0; j < sample_size; ++j) {
+            for (int sample = 0; sample < sample_size; ++sample) {
                 point3 sample_pixel = choose_pixel(pixel_center);
 
                 vec3 ray_direction = sample_pixel - camera_center;
-                ray r = ray(camera_center, ray_direction);
+                ray r_sample = ray(camera_center, ray_direction);
 
-                pixel_color += color_world(world, r, background_color);
+                pixel_color += color_world(world, r_sample, background_color);
+
             }
-
             write_color(std::cout, pixel_color / sample_size);
         }
     }

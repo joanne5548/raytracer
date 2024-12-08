@@ -16,8 +16,8 @@ color ray_color_vertical_gradient(const ray& r) {
 
     // start from blue, end as pink - top to bottom
     color start_color = color(209, 243, 255);
-    color end_color = color(248, 200, 220);
-    return y_pos_norm * start_color + (1 - y_pos_norm) * end_color;
+    color end_color = color(255, 255, 255);
+    return (y_pos_norm * start_color + (1 - y_pos_norm) * end_color) / 255.999;
 }
 
 color ray_color_diagonal_gradient(const ray& r, double viewport_ratio) {
@@ -34,7 +34,7 @@ color ray_color_diagonal_gradient(const ray& r, double viewport_ratio) {
     if (y_pos_norm > viewport_ratio * x_pos_norm) {
         return start_color * (1 - 0.5 * y_pos_norm) + end_color * (0.5 * x_pos_norm);
     }
-    return start_color * (0.5 - 0.5 * y_pos_norm) + end_color * (0.5 + 0.5 * x_pos_norm);
+    return (start_color * (0.5 - 0.5 * y_pos_norm) + end_color * (0.5 + 0.5 * x_pos_norm)) / 255.999;
 }
 
 /**

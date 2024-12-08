@@ -22,17 +22,9 @@ inline void write_color(std::ostream& out, const color& pixel_color) {
     double g = pixel_color.y();
     double b = pixel_color.z();
 
-    int rbyte, gbyte, bbyte;
-    if (r < 1.0 && g < 1.0 && b < 1.0) {
-        rbyte = int(255.999 * r);
-        gbyte = int(255.999 * g);
-        bbyte = int(255.999 * b);
-    }
-    else {
-        rbyte = r;
-        gbyte = g;
-        bbyte = b;
-    }
+    int rbyte = int(r * 256);
+    int gbyte = int(g * 256);
+    int bbyte = int(b * 256);
 
     out << rbyte << ' ' << gbyte << ' ' << bbyte << '\n';
 }

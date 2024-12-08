@@ -12,7 +12,6 @@ class camera {
         int image_width, image_height;
         point3 camera_center;
         vec3 pixel_delta_w, pixel_delta_h, pixel00_loc;
-        int sample_size = 8;
 
         color color_world(const hittable_list& list, const ray& r, color (*background_color)(const ray&));
 
@@ -23,7 +22,7 @@ class camera {
 
         void render(const hittable_list& world, color (*background_color)(const ray&));
 
-        void render_uniform_sampling(const hittable_list& world, color (*background_color)(const ray&));
+        void render_uniform_sampling(const hittable_list& world, color (*background_color)(const ray&), int sample_size);
 };
 
 #endif
