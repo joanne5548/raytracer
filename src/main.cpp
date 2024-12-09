@@ -15,7 +15,7 @@ int main() {
     happyAndPeacefulWorld.add(make_shared<sphere>(sphere(point3(-0.25, -0.5, -4), 0.5)));
     happyAndPeacefulWorld.add(make_shared<sphere>(sphere(point3(0, -100.5, -5), 100)));
 
-    camera.render_uniform_sampling(happyAndPeacefulWorld, &ray_color_vertical_gradient, 8);
+    camera.render_uniform_sampling(happyAndPeacefulWorld, &ray_color_vertical_gradient, 32);
     
     return 0;
 }

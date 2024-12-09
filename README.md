@@ -12,7 +12,7 @@ The website [PPM Viewer](https://www.cs.rhodes.edu/welshc/COMP141_F16/ppmReader.
 
 ### Sample Images (work in progress)
 ![Vertical gradient, pink to yellow](/sample_images/previous/sphere_minus.png) <br />
-Before Uniform Sampling            |  After Uniform Sampling
+Before Uniform Sampling            |  After Uniform Sampling (n=32)
 :-------------------------:|:-------------------------:
 ![before sampling](/sample_images/readme/before%20sampling.png)  |  ![after sampling](/sample_images/readme/after%20sampling.png)
 
