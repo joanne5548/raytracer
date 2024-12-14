@@ -66,9 +66,10 @@ void camera::render(const hittable_list& world, color (*background_color)(const 
     std::clog  << "\rDone.                 \n";
 }
 
-point3 camera::choose_pixel(point3 target) {
-    double x_rand = random_number_generator(-0.5, 0.5);
-    double y_rand = random_number_generator(-0.5, 0.5);
+point3 camera::choose_pixel(point3 target, int grid_size) {
+    double offset = 0.5 / grid_size;
+    double x_rand = random_number_generator(-offset, offset);
+    double y_rand = random_number_generator(-offset, offset);
     return target + x_rand * pixel_delta_w + y_rand * pixel_delta_h;
 }
 
@@ -82,7 +83,7 @@ void camera::render_uniform_sampling(const hittable_list& world, color (*backgro
             
             color pixel_color(0, 0, 0);
             for (int sample = 0; sample < sample_size; ++sample) {
-                point3 sample_pixel = choose_pixel(pixel_center);
+                point3 sample_pixel = choose_pixel(pixel_center, 1);
 
                 vec3 ray_direction = sample_pixel - camera_center;
                 ray r_sample = ray(camera_center, ray_direction);
@@ -91,6 +92,35 @@ void camera::render_uniform_sampling(const hittable_list& world, color (*backgro
 
             }
             write_color(std::cout, pixel_color / sample_size);
+        }
+    }
+    std::clog  << "\rDone.                 \n";
+}
+
+void camera::render_stratified_sampling(const hittable_list& world, color (*background_color)(const ray&), int grid_size) {
+    std::cout << "P3\n" << image_width << " " << image_height << "\n255\n";
+    vec3 pixel_delta_w_grid = pixel_delta_w / grid_size;
+    vec3 pixel_delta_h_grid = pixel_delta_h / grid_size;
+
+    for (int j = 0; j < image_height; ++j) {
+        std::clog << "\rScanlines remaining: " << image_height - j << " " << std::flush;
+        for (int i = 0; i < image_width; ++i) {
+            vec3 pixel_center = pixel00_loc + i * pixel_delta_w + j * pixel_delta_h;
+            
+            color pixel_color(0, 0, 0);
+            for (int grid_width = 0; grid_width < grid_size; ++grid_width) {
+                for (int grid_height = 0; grid_height < grid_size; ++grid_height) {
+                    vec3 grid_pixel_center = pixel_center + grid_width * pixel_delta_w_grid + grid_height * pixel_delta_h_grid;
+                    point3 sample_pixel = choose_pixel(grid_pixel_center, grid_size);
+
+                    vec3 ray_direction = sample_pixel - camera_center;
+                    ray r_sample = ray(camera_center, ray_direction);
+
+                    pixel_color += color_world(world, r_sample, background_color);
+                }
+            }
+            
+            write_color(std::cout, pixel_color / grid_size * grid_size);
         }
     }
     std::clog  << "\rDone.                 \n";

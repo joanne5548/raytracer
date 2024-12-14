@@ -15,7 +15,7 @@ class camera {
 
         color color_world(const hittable_list& list, const ray& r, color (*background_color)(const ray&));
 
-        point3 choose_pixel(point3 target);
+        point3 choose_pixel(point3 target, int grid_size);
 
     public:
         void initialize();
@@ -23,6 +23,8 @@ class camera {
         void render(const hittable_list& world, color (*background_color)(const ray&));
 
         void render_uniform_sampling(const hittable_list& world, color (*background_color)(const ray&), int sample_size);
+
+        void render_stratified_sampling(const hittable_list& world, color (*background_color)(const ray&), int grid_size);
 };
 
 #endif
